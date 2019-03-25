@@ -38,7 +38,7 @@ export default class NavBar extends React.Component {
                 <NavLink href="/components/"> Now Playing </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap"> Upcoming </NavLink>
+                <NavLink href="https://github.com/reactstrap/reactstrap"> Upcomingn  </NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>

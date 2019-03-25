@@ -7,7 +7,7 @@ export default class Search extends Component {
             <div>
                 <div class="col-sm">
                 <b> Search </b>
-                <Input type="text" id="exampleEmail" placeholder="search anything" onClick={() => this.setState({pageNumber: 2})}/>
+                <Input type="text" id="exampleEmail" placeholder="search anything" onChange={(e) => this.props.textChange(e.target.value)}/>
 
                 </div>
             </div>

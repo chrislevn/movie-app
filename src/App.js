@@ -12,6 +12,8 @@ import Filter from './Filter';
 import Search from './Search';
 import Footer from './Footer'
 
+import ReactModal from 'react-modal';
+
 import SAMPLE_DATA from './sample_data';
 
 class App extends Component {
@@ -20,8 +22,10 @@ class App extends Component {
     super(props);
     this.state = {
       moviesList: [],
-      pageNumber: 1
+      selectedPage: 1,
+      showModal: false
     }
+      this.handleSelected = this.handleSelected.bind(this);
   }
 
    componentDidMount() {
@@ -30,7 +34,7 @@ class App extends Component {
 
   fetchMovies() {
     let apiKey = '69af71dc4080c45a2874a8e8b7220651';
-    const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&page=${this.state.pageNumber}`
+    const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&page=${this.state.selectedPage}`
     fetch(url).
       then(results => results.json()).
       then( data => this.setState({moviesList: data.results}))
@@ -45,15 +49,25 @@ class App extends Component {
   }
 
   handleChange = ()  => {
-    alert('')
     this.setState((prevState, props) => {return {pageNumber : prevState.pageNumber + 1}})
     this.fetchMovies();
+  }
+
+  handleSelected(selectedPage) {
+    alert('');
+    console.log("selected", selectedPage);
+    this.setState({ selectedPage: selectedPage });
+    
   }
   
   render() {
     return (
       <div className="App">
        <NavBar />
+       <ReactModal  isOpen={this.state.showModal}>
+      <button onClick={() => this.setState({ showModal: false})}> Hide Modal </button>
+</ReactModal>
+
         <div class="row">
           <div class="col-4">
              <p> </p>
@@ -61,13 +75,13 @@ class App extends Component {
             <p> </p>
             <Filter />
             <p> </p>
-            <Search /> 
+            <Search textChange={this.onSearchTermChanged}/> 
           </div>
 
           <div class="col-8">
             <h1> Now Playing </h1>
             <MoviesList movies={this.state.moviesList} />
-            <Footer onChange={this.handleChange} />
+            <Footer onSelect={this.handleSelected} />
           </div>
           </div>
           <Button onClick={() => this.handleChange()} >  See more </Button>
