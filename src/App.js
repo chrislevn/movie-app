@@ -13,6 +13,8 @@ import Search from './Search';
 import Footer from './Footer'
 
 import SAMPLE_DATA from './sample_data';
+import ReactModal from 'react-modal';
+import YouTube from '@u-wave/react-youtube';
 
 class App extends Component {
 
@@ -20,7 +22,8 @@ class App extends Component {
     super(props);
     this.state = {
       moviesList: [],
-      pageNumber: 1
+      pageNumber: 1,
+      showModal: false,
     }
   }
 
@@ -56,6 +59,16 @@ class App extends Component {
        <NavBar />
         <div class="row">
           <div class="col-4">
+            {/* Create a modal */}
+            <ReactModal isOpen={this.state.showModal}>
+              <button onClick={() => this.setState({showModal: false})} > Hide Modal </button>
+              <YouTube
+                video="x2to0hs"
+                autoplay
+              />
+            </ReactModal>
+            
+            <button onClick={() => this.setState({showModal: true})}>Trailers</button>
              <p> </p>
             <Genre />
             <p> </p>
