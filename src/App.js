@@ -12,6 +12,7 @@ import Filter from './Filter';
 import Search from './Search';
 import Footer from './Footer'
 
+
 import SAMPLE_DATA from './sample_data';
 import ReactModal from 'react-modal';
 import YouTube from '@u-wave/react-youtube';
@@ -24,16 +25,26 @@ class App extends Component {
       moviesList: [],
       pageNumber: 1,
       showModal: false,
+      searchTerm: ''
     }
+    this.fetchMovies = this.fetchMovies.bind(this);
   }
+
+  onSearchTermChanged = text => {
+    this.setState({
+      searchTerm: text
+    }, () => console.log(this.state.searchTerm));
+  };
+
 
    componentDidMount() {
     this.fetchMovies();
   }
 
-  fetchMovies() {
+  fetchMovies(number) {
     let apiKey = '69af71dc4080c45a2874a8e8b7220651';
-    const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&page=${this.state.pageNumber}`
+    const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&page=${number}`
+    
     fetch(url).
       then(results => results.json()).
       then( data => this.setState({moviesList: data.results}))
@@ -47,43 +58,38 @@ class App extends Component {
     then( data => this.setState({moviesList: data.results}))
   }
 
-  handleChange = ()  => {
-    alert('')
-    this.setState((prevState, props) => {return {pageNumber : prevState.pageNumber + 1}})
-    this.fetchMovies();
-  }
-  
+
   render() {
+    let displayMovie
+    if (this.state.movies)  {
+      displayMovie=this.state.moviesList;
+    } else {
+     displayMovie = this.state.moviesList.filter(item => item.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()))
+    // displayMovie=this.state.moviesList;
+
+    }
     return (
       <div className="App">
        <NavBar />
         <div class="row">
           <div class="col-4">
-            {/* Create a modal */}
-            <ReactModal isOpen={this.state.showModal}>
-              <button onClick={() => this.setState({showModal: false})} > Hide Modal </button>
-              <YouTube
-                video="x2to0hs"
-                autoplay
-              />
-            </ReactModal>
-            
-            <button onClick={() => this.setState({showModal: true})}>Trailers</button>
-             <p> </p>
+            <p> </p>
             <Genre />
             <p> </p>
             <Filter />
             <p> </p>
-            <Search /> 
+            <Search textChange={this.onSearchTermChanged}/> 
+            <p> </p>
+            <Footer fetchMovies={this.fetchMovies}/>
           </div>
 
           <div class="col-8">
             <h1> Now Playing </h1>
-            <MoviesList movies={this.state.moviesList} />
-            <Footer onChange={this.handleChange} />
+            <MoviesList movies={displayMovie}  />
+            
           </div>
           </div>
-          <Button onClick={() => this.handleChange()} >  See more </Button>
+          
       </div>
     );
   }

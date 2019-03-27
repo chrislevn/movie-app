@@ -15,6 +15,18 @@ import YouTube from "@u-wave/react-youtube";
 // attached the poster_path to the
 // `baseurl` https://image.tmdb.org/t/p/w500/
 
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
 export default class Movie extends Component {
   constructor(props) {
     super(props);
@@ -23,6 +35,8 @@ export default class Movie extends Component {
       trailer: []
     };
   }
+
+  
 
   fetchTrailer = () => {
     let movie_id = this.props.id;
@@ -67,10 +81,12 @@ export default class Movie extends Component {
         <ReactModal
           isOpen={this.state.showModal}
           trailer={this.state.trailer.key}
-        >
+          style={customStyles}
+           >
+          
           <YouTube video={this.state.trailer.key} autoplay />
           <div>
-            <button onClick={() => this.setState({ showModal: false })}>
+            <button  onClick={() => this.setState({ showModal: false })}>
               {" "}
               Close trailer{" "}
             </button>

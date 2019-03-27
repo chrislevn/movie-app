@@ -1,51 +1,37 @@
 import React, {Component} from 'react'
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 import App from './App';
+import PaginationComponent from "react-reactstrap-pagination";
 
 export default class Footer extends Component {
 
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          selectedPage: 1
+        };
+    
+        this.handleSelected = this.handleSelected.bind(this);
+      }
 
-    onChange = this.handleChange;
+      handleSelected(selectedPage) {
+        console.log("selected", selectedPage);
+        this.setState({ selectedPage: selectedPage });
+       let numberPage = selectedPage 
+       this.props.fetchMovies(numberPage);
+      }
+    
       
     render() {
         return (
-            <div>
-                <Pagination aria-label="Page navigation example">
-      
-        <PaginationItem>
-          <PaginationLink previous href="#" />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink onClick={this.props.onChange} >
-            1
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink onClick={this.props.onChange} >
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            3
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            4
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">
-            5
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink next href="#" />
-        </PaginationItem>
-        
-      </Pagination>
-            </div>
+           <div className="container-fluid">
+                <PaginationComponent
+                totalItems={50}
+                pageSize={3}
+                onSelect={this.handleSelected} />
+
+      </div>
         )
     }
 }
