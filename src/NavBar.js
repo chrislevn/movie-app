@@ -37,10 +37,10 @@ export default class NavBar extends React.Component {
               <NavItem>
                 <NavLink href="/components/"> Now Playing </NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap"> Upcomingn  </NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+              {/* <NavItem>
+                <NavLink href="https://github.com/reactstrap/reactstrap"> Upcoming  </NavLink>
+              </NavItem> */}
+              {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Options
                 </DropdownToggle>
@@ -56,7 +56,7 @@ export default class NavBar extends React.Component {
                     Reset
                   </DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
             </Nav>
           </Collapse>
         </Navbar>

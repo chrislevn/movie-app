@@ -65,26 +65,26 @@ class App extends Component {
       <div className="App">
        <NavBar />
        <ReactModal  isOpen={this.state.showModal}>
-      <button onClick={() => this.setState({ showModal: false})}> Hide Modal </button>
-</ReactModal>
+            <button onClick={() => this.setState({ showModal: false})}> Hide Modal </button>
+        </ReactModal>
 
         <div class="row">
-          <div class="col-4">
+          {/* <div class="col-4">
              <p> </p>
             <Genre />
             <p> </p>
             <Filter />
             <p> </p>
             <Search textChange={this.onSearchTermChanged}/> 
-          </div>
+          </div> */}
 
-          <div class="col-8">
+          <div>
             <h1> Now Playing </h1>
             <MoviesList movies={this.state.moviesList} />
-            <Footer onSelect={this.handleSelected} />
+            {/* <Footer onSelect={this.handleSelected} /> */}
           </div>
           </div>
-          <Button onClick={() => this.handleChange()} >  See more </Button>
+          {/* <Button onClick={() => this.handleChange()} >  See more </Button> */}
       </div>
     );
   }

@@ -17,7 +17,7 @@ export default class Filter extends Component {
     render() {
         return (
             <div>
-                <b> Year </b>
+                {/* <b> Year </b>
                 <div class="col-sm">
                 <p> </p>
                 <InputRange
@@ -44,7 +44,7 @@ export default class Filter extends Component {
                     minValue={0}
                     value={this.state.value3}
                     onChange={value3 => this.setState({ value3 })} />
-                </div>
+                </div> */}
             </div>
         )
     }

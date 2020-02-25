@@ -28,7 +28,7 @@ export default class Movie extends Component {
             <CardTitle> <b>{this.props.title}</b></CardTitle>
             <CardText>{this.props.overview}</CardText>
             <p> Rating: {this.props.vote_average}</p>
-            <Button color="danger" onClick={() => this.setState({ showModal: true})}> See Trailer </Button>
+            {/* <Button color="danger" onClick={() => this.setState({ showModal: true})}> See Trailer </Button> */}
           </CardBody> 
         </Card>
         
